@@ -21,11 +21,11 @@ _ = conv_block(_, filters=32 * 5)
 _ = conv_block(_, filters=32 * 6)
 bottleneck = GlobalMaxPool2D()(_)
 
-# for age calculation
+# age calc
 _ = Dense(units=128, activation='relu')(bottleneck)
 age_output = Dense(units=1, activation='sigmoid', name='age_output')(_)
 
-# for gender prediction
+# gender prediction
 _ = Dense(units=128, activation='relu')(bottleneck)
 gender_output = Dense(units=len(GENDER_ID_MAP), activation='softmax', name='gender_output')(_)
 
@@ -34,7 +34,7 @@ model.compile(optimizer='rmsprop',
               loss={'age_output': 'mse', 'gender_output': 'categorical_crossentropy'},
               loss_weights={'age_output': 2., 'gender_output': 1.},
               metrics={'age_output': 'mae', 'gender_output': 'accuracy'})
-# model.summary()
+# run model.summary()
 
 
 
